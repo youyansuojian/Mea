@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hrbeu.mes.dao.UserMapper">
+
+    <!-- User表 resultMap -->
+    <resultMap id="BaseResultMap" type="User">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="userCode" property="usercode" jdbcType="VARCHAR"/>
+        <result column="userName" property="username" jdbcType="VARCHAR"/>
+        <result column="userPassword" property="userpassword" jdbcType="VARCHAR"/>
+        <result column="gender" property="gender" jdbcType="INTEGER"/>
+        <result column="birthday" property="birthday" jdbcType="DATE"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="userRole" property="userrole" jdbcType="INTEGER"/>
+        <result column="createdBy" property="createdby" jdbcType="BIGINT"/>
+        <result column="creationDate" property="creationdate" jdbcType="TIMESTAMP"/>
+        <result column="modifyBy" property="modifyby" jdbcType="BIGINT"/>
+        <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 当数据库中的字段信息与对象的属性不一致时需要通过resultMap来映射 -->
+    <resultMap id="userList" type="User">
+        <id property="id" column="id"/>
+        <id property="workPicPath" column="workPicPath"/>
+        <id property="workPicPath" column="workPicPath"/>
+        <result property="userRoleName" column="roleName"/>
+    </resultMap>
+
+    <!-- User表 sql片段 -->
+    <sql id="Base_Column_List">
+        id, userCode, userName, userPassword, gender, birthday,
+        phone, address,userRole,createdBy, creationDate, modifyBy, modifyDate
+    </sql>
+
+    <!-- 登录验证  -->
+    <select id="getLoginUser" resultType="User" parameterType="String">
+        select * from smbms_user where userCode=#{userCode}
+    </select>
+
+    <!-- 查询用户列表  getUserList  分页 -->
+    <select id="getUserList" resultMap="userList" parameterType="map">
+        SELECT u.*,r.roleName AS roleName FROM smbms_user u,smbms_role r
+        <trim prefix="WHERE u.userRole=r.id">
+            <if test="userName!='' and userName!=null">AND u.userName LIKE CONCAT('%',#{userName},'%')</if>
+            <if test="userRole!=null and userRole!=0">AND u.userRole=#{userRole}</if>
+            order by creationDate DESC limit #{pageIndex},#{pageSize}
+        </trim>
+    </select>
+
+    <!-- 查询用户数量  -->
+    <select id="getUserCount" resultType="int">
+        select count(1) as count from smbms_user u,smbms_role r where u.userRole = r.id
+        <if test="userRole != null and 0!=userRole">
+            and u.userRole = #{userRole}
+        </if>
+        <if test="userName != null and userName != ''">
+            and u.userName like CONCAT ('%',#{userName},'%')
+        </if>
+    </select>
+
+    <!--  查询userCode是否存在    -->
+    <select id="selectUserCodeExist" resultType="User" parameterType="String">
+        select * from smbms_user u where u.userCode = #{userCode}
+    </select>
+
+    <!-- 根据用户id修改密码 -->
+    <update id="updatePwd">
+        update smbms_user set userPassword=#{pwd} where id = #{id}
+    </update>
+
+
+    <!--  根据用户id查询指定用户信息   -->
+    <select id="selectByPrimaryKey" resultMap="userList"
+            parameterType="java.lang.Integer">
+        select u.*,r.roleName as roleName from smbms_user u,smbms_role r
+        where u.id=#{id} and u.userRole = r.id
+    </select>
+
+    <!--  根据用户id删除指定用户信息  -->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from
+        smbms_user
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <!-- 根据角色id查询用户是否存在数据    -->
+    <select id="getRoleIdByUserInfo" resultType="User" parameterType="java.lang.Integer">
+        select * from smbms_user where userRole = #{roleId}
+    </select>
+
+    <!--  为用户添加一条完整数据   -->
+    <insert id="insert" parameterType="User">
+        insert into smbms_user (
+        userCode, userName,
+        userPassword, gender,birthday,
+        phone, address,
+        userRole,
+        createdBy, creationDate,idPicPath,workPicPath)
+        values
+        (#{userCode,jdbcType=VARCHAR},
+        #{userName,jdbcType=VARCHAR},
+        #{userPassword,jdbcType=VARCHAR},
+        #{gender,jdbcType=INTEGER},
+        #{birthday,jdbcType=DATE},
+        #{phone,jdbcType=VARCHAR},
+        #{address,jdbcType=VARCHAR},
+        #{userRole,jdbcType=INTEGER},
+        #{createdBy,jdbcType=BIGINT},
+        #{creationDate,jdbcType=TIMESTAMP},
+        #{idPicPath,jdbcType=VARCHAR},
+        #{workPicPath,jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 为用户添加一条数据 可选择性  -->
+    <insert id="insertSelective" parameterType="User">
+        insert into smbms_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="usercode != null">
+                userCode,
+            </if>
+            <if test="username != null">
+                userName,
+            </if>
+            <if test="userpassword != null">
+                userPassword,
+            </if>
+            <if test="gender != null">
+                gender,
+            </if>
+            <if test="birthday != null">
+                birthday,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="userrole != null">
+                userRole,
+            </if>
+            <if test="createdby != null">
+                createdBy,
+            </if>
+            <if test="creationdate != null">
+                creationDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="usercode != null">
+                #{usercode,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="userpassword != null">
+                #{userpassword,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                #{gender,jdbcType=INTEGER},
+            </if>
+            <if test="birthday != null">
+                #{birthday,jdbcType=DATE},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="userrole != null">
+                #{userrole,jdbcType=INTEGER},
+            </if>
+            <if test="createdby != null">
+                #{createdby,jdbcType=BIGINT},
+            </if>
+            <if test="creationdate != null">
+                #{creationdate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <!--  根据用户id修改用户不为空的字段信息  -->
+    <update id="updateByPrimaryKeySelective" parameterType="User">
+        update smbms_user
+        <set>
+            <if test="userCode != null">
+                userCode = #{userCode,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                userName = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userPassword != null">
+                userPassword = #{userPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                gender = #{gender,jdbcType=INTEGER},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday,jdbcType=DATE},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="userRole != null">
+                userRole = #{userRole,jdbcType=INTEGER},
+            </if>
+            <if test="createdBy != null">
+                createdBy = #{createdBy,jdbcType=BIGINT},
+            </if>
+            <if test="creationDate != null">
+                creationDate = #{creationDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyBy != null">
+                modifyBy = #{modifyBy,jdbcType=BIGINT},
+            </if>
+            <if test="modifyDate != null">
+                modifyDate = #{modifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <!-- 根据用户id修改用户信息 如为空的字段在数据库中置为NULL。  -->
+    <update id="updateByPrimaryKey" parameterType="User">
+        update smbms_user
+        set userCode = #{userCode,jdbcType=VARCHAR},
+        userName =#{userName,jdbcType=VARCHAR},
+        userPassword =#{userPassword,jdbcType=VARCHAR},
+        gender = #{gender,jdbcType=INTEGER},
+        birthday = #{birthday,jdbcType=DATE},
+        phone =#{phone,jdbcType=VARCHAR},
+        address = #{address,jdbcType=VARCHAR},
+        userRole = #{userRole,jdbcType=INTEGER},
+        createdBy =#{createdBy,jdbcType=BIGINT},
+        creationDate =#{creationDate,jdbcType=TIMESTAMP},
+        modifyBy =#{modifyBy,jdbcType=BIGINT},
+        modifyDate =#{modifyDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

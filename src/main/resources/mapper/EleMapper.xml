@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hrbeu.mes.dao.EleMapper">
+
+    <resultMap id="EleMap" type="Electrolyze">
+        <id property="id" column="id"/>
+        <result property="prop_1" column="prop_1"/>
+        <result property="prop_2" column="prop_2"/>
+        <result property="prop_3" column="prop_3"/>
+        <result property="prop_4" column="prop_4"/>
+        <result property="prop_5" column="prop_5"/>
+        <result property="prop_6" column="prop_6"/>
+        <result property="prop_7" column="prop_7"/>
+        <result property="prop_8" column="prop_8"/>
+        <result property="prop_9" column="prop_9"/>
+        <result property="prop_10" column="prop_10"/>
+        <result property="prop_11" column="prop_11"/>
+        <result property="prop_12" column="prop_12"/>
+        <result property="prop_13" column="prop_13"/>
+        <result property="prop_14" column="prop_14"/>
+        <result property="prop_15" column="prop_15"/>
+        <result property="prop_16" column="prop_16"/>
+        <result property="prop_17" column="prop_17"/>
+        <result property="prop_18" column="prop_18"/>
+        <result property="prop_19" column="prop_19"/>
+        <result property="prop_20" column="prop_20"/>
+        <result property="prop_21" column="prop_21"/>
+        <result property="prop_22" column="prop_22"/>
+        <result property="prop_23" column="prop_23"/>
+        <result property="prop_24" column="prop_24"/>
+        <result property="prop_25" column="prop_25"/>
+        <result property="prop_26" column="prop_26"/>
+        <result property="prop_27" column="prop_27"/>
+        <result property="prop_28" column="prop_28"/>
+        <result property="prop_29" column="prop_29"/>
+        <result property="prop_30" column="prop_30"/>
+        <result property="prop_31" column="prop_31"/>
+        <result property="prop_32" column="prop_32"/>
+        <result property="prop_33" column="prop_33"/>
+        <result property="prop_34" column="prop_34"/>
+        <result property="prop_35" column="prop_35"/>
+        <result property="prop_36" column="prop_36"/>
+        <result property="prop_37" column="prop_37"/>
+        <result property="prop_38" column="prop_38"/>
+        <result property="prop_39" column="prop_39"/>
+        <result property="prop_40" column="prop_40"/>
+        <result property="prop_41" column="prop_41"/>
+        <result property="prop_42" column="prop_42"/>
+        <result property="prop_43" column="prop_43"/>
+        <result property="prop_44" column="prop_44"/>
+        <result property="prop_45" column="prop_45"/>
+        <result property="prop_46" column="prop_46"/>
+        <result property="prop_47" column="prop_47"/>
+        <result property="prop_48" column="prop_48"/>
+        <result property="prop_49" column="prop_49"/>
+        <result property="prop_50" column="prop_50"/>
+        <result property="prop_51" column="prop_51"/>
+        <result property="prop_52" column="prop_52"/>
+        <result property="prop_53" column="prop_53"/>
+        <result property="prop_54" column="prop_54"/>
+        <result property="prop_55" column="prop_55"/>
+        <result property="prop_56" column="prop_56"/>
+        <result property="prop_57" column="prop_57"/>
+        <result property="prop_58" column="prop_58"/>
+        <result property="prop_59" column="prop_59"/>
+        <result property="prop_60" column="prop_60"/>
+        <result property="prop_61" column="prop_61"/>
+        <result property="prop_62" column="prop_62"/>
+        <result property="prop_63" column="prop_63"/>
+        <result property="prop_64" column="prop_64"/>
+        <result property="prop_65" column="prop_65"/>
+        <result property="prop_66" column="prop_66"/>
+        <result property="prop_67" column="prop_67"/>
+        <result property="prop_68" column="prop_68"/>
+        <result property="prop_69" column="prop_69"/>
+        <result property="prop_70" column="prop_70"/>
+        <result property="prop_71" column="prop_71"/>
+    </resultMap>
+    <resultMap id="TpMap" type="Template">
+        <id property="id" column="id"/>
+        <result property="table_name" column="table_name"/>
+        <result property="tp_name" column="tp_name"/>
+        <result property="header_index" column="header_index"/>
+        <result property="header_content" column="header_content"/>
+        <result property="header_merge" column="header_merge"/>
+        <result property="data_merge" column="data_merge"/>
+    </resultMap>
+    <select id="queryData" resultMap="EleMap">
+        select * from tb_electrolyze where 1=1
+    </select>
+    <update id="updateData">
+        update tb_electrolyze
+        <set>
+            <if test="prop_1!=null">
+                prop_1 = #{prop_1},
+            </if>
+            <if test="prop_2!=null">
+                prop_2 = #{prop_2},
+            </if>
+            <if test="prop_3!=null">
+                prop_3 = #{prop_3},
+            </if>
+            <if test="prop_4!=null">
+                prop_4 = #{prop_4},
+            </if>
+            <if test="prop_5!=null">
+                prop_5 = #{prop_5},
+            </if>
+            <if test="prop_6!=null">
+                prop_6 = #{prop_6},
+            </if>
+            <if test="prop_7!=null">
+                prop_7 = #{prop_7},
+            </if>
+            <if test="prop_8!=null">
+                prop_8 = #{prop_8},
+            </if>
+            <if test="prop_9!=null">
+                prop_9 = #{prop_9},
+            </if>
+            <if test="prop_10!=null">
+                prop_10 = #{prop_10},
+            </if>
+            <if test="prop_11!=null">
+                prop_11 = #{prop_11},
+            </if>
+            <if test="prop_12!=null">
+                prop_12 = #{prop_12},
+            </if>
+            <if test="prop_13!=null">
+                prop_13 = #{prop_13},
+            </if>
+            <if test="prop_14!=null">
+                prop_14 = #{prop_14},
+            </if>
+            <if test="prop_15!=null">
+                prop_15 = #{prop_15},
+            </if>
+            <if test="prop_16!=null">
+                prop_16 = #{prop_16},
+            </if>
+            <if test="prop_17!=null">
+                prop_17 = #{prop_17},
+            </if>
+            <if test="prop_18!=null">
+                prop_18 = #{prop_18},
+            </if>
+            <if test="prop_19!=null">
+                prop_19 = #{prop_19},
+            </if>
+            <if test="prop_20!=null">
+                prop_20 = #{prop_20},
+            </if>
+            <if test="prop_21!=null">
+                prop_21 = #{prop_21},
+            </if>
+            <if test="prop_22!=null">
+                prop_22 = #{prop_22},
+            </if>
+            <if test="prop_23!=null">
+                prop_23 = #{prop_23},
+            </if>
+            <if test="prop_24!=null">
+                prop_24 = #{prop_24},
+            </if>
+            <if test="prop_25!=null">
+                prop_25 = #{prop_25},
+            </if>
+            <if test="prop_26!=null">
+                prop_26 = #{prop_26},
+            </if>
+            <if test="prop_27!=null">
+                prop_27 = #{prop_27},
+            </if>
+            <if test="prop_28!=null">
+                prop_28 = #{prop_28},
+            </if>
+            <if test="prop_29!=null">
+                prop_29 = #{prop_29},
+            </if>
+            <if test="prop_30!=null">
+                prop_30 = #{prop_30},
+            </if>
+            <if test="prop_31!=null">
+                prop_31 = #{prop_31},
+            </if>
+            <if test="prop_32!=null">
+                prop_32 = #{prop_32},
+            </if>
+            <if test="prop_33!=null">
+                prop_33 = #{prop_33},
+            </if>
+            <if test="prop_34!=null">
+                prop_34 = #{prop_34},
+            </if>
+            <if test="prop_35!=null">
+                prop_35 = #{prop_35},
+            </if>
+            <if test="prop_36!=null">
+                prop_36 = #{prop_36},
+            </if>
+            <if test="prop_37!=null">
+                prop_37 = #{prop_37},
+            </if>
+            <if test="prop_38!=null">
+                prop_38 = #{prop_38},
+            </if>
+            <if test="prop_39!=null">
+                prop_39 = #{prop_39},
+            </if>
+            <if test="prop_40!=null">
+                prop_40 = #{prop_40},
+            </if>
+            <if test="prop_41!=null">
+                prop_41 = #{prop_41},
+            </if>
+            <if test="prop_42!=null">
+                prop_42 = #{prop_42},
+            </if>
+            <if test="prop_43!=null">
+                prop_43 = #{prop_43},
+            </if>
+            <if test="prop_44!=null">
+                prop_44 = #{prop_44},
+            </if>
+            <if test="prop_45!=null">
+                prop_45 = #{prop_45},
+            </if>
+            <if test="prop_46!=null">
+                prop_46 = #{prop_46},
+            </if>
+            <if test="prop_47!=null">
+                prop_47 = #{prop_47},
+            </if>
+            <if test="prop_48!=null">
+                prop_48 = #{prop_48},
+            </if>
+            <if test="prop_49!=null">
+                prop_49 = #{prop_49},
+            </if>
+            <if test="prop_50!=null">
+                prop_50 = #{prop_50},
+            </if>
+            <if test="prop_51!=null">
+                prop_51 = #{prop_51},
+            </if>
+            <if test="prop_52!=null">
+                prop_52 = #{prop_52},
+            </if>
+            <if test="prop_53!=null">
+                prop_53 = #{prop_53},
+            </if>
+            <if test="prop_54!=null">
+                prop_54 = #{prop_54},
+            </if>
+            <if test="prop_55!=null">
+                prop_55 = #{prop_55},
+            </if>
+            <if test="prop_56!=null">
+                prop_56 = #{prop_56},
+            </if>
+            <if test="prop_57!=null">
+                prop_57 = #{prop_57},
+            </if>
+            <if test="prop_58!=null">
+                prop_58 = #{prop_58},
+            </if>
+            <if test="prop_59!=null">
+                prop_59 = #{prop_59},
+            </if>
+            <if test="prop_60!=null">
+                prop_60 = #{prop_60},
+            </if>
+            <if test="prop_61!=null">
+                prop_61 = #{prop_61},
+            </if>
+            <if test="prop_62!=null">
+                prop_62 = #{prop_62},
+            </if>
+            <if test="prop_63!=null">
+                prop_63 = #{prop_63},
+            </if>
+            <if test="prop_64!=null">
+                prop_64 = #{prop_64},
+            </if>
+            <if test="prop_65!=null">
+                prop_65 = #{prop_65},
+            </if>
+            <if test="prop_66!=null">
+                prop_66 = #{prop_66},
+            </if>
+            <if test="prop_67!=null">
+                prop_67 = #{prop_67},
+            </if>
+            <if test="prop_68!=null">
+                prop_68 = #{prop_68},
+            </if>
+            <if test="prop_69!=null">
+                prop_69 = #{prop_69},
+            </if>
+            <if test="prop_70!=null">
+                prop_70 = #{prop_70},
+            </if>
+            <if test="prop_71!=null">
+                prop_71 = #{prop_71},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <insert id="saveTp">
+        insert into tb_template (table_name,tp_name,header_index,header_content,header_merge,data_merge)
+        values
+        (#{table_name},
+        #{tp_name},
+        #{header_index},
+        #{header_content},
+        #{header_merge},
+        #{data_merge})
+    </insert>
+    <update id="updateTp">
+        update tb_template
+        <set>
+            <if test="tp_name !=null">
+                tp_name = #{tp_name},
+            </if>
+            <if test="header_index !=null">
+                header_index = #{header_index},
+            </if>
+            <if test="header_content !=null">
+                header_content = #{header_content},
+            </if>
+            <if test="header_merge !=null">
+                header_merge = #{header_merge},
+            </if>
+            <if test="data_merge !=null">
+                data_merge = #{data_merge},
+            </if>
+            <if test="fix_column_left !=null">
+                fix_column_left = #{fix_column_left},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <select id="getTpByID" resultMap="TpMap">
+        select * from tb_template where id=#{id}
+    </select>
+    <select id="getTpList" resultMap="TpMap">
+        select * from tb_template where table_name=#{table_name}
+    </select>
+    <update id="saveDataMerge">
+        update tb_template set data_merge=#{data_merge} where id=#{id}
+    </update>
+
+</mapper>
